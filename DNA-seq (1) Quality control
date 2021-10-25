@@ -1,0 +1,43 @@
+DNA-seq的分析主要包括以下几个部分：
+1.Quality control(QC)
+2.Mapping
+3.SNP and small INDEL calling
+4.Structural variation calling
+5.Copy number variation calling
+6.Variants function annotation
+
+
+(1)对数据做QC比较常用的工具是FastQC (http://www.bioinformatics.babraham.ac.uk/projects/fastqc/)，其中QC的统计结果比较多，包含以下信息：
+1.Basic Statistics
+
+2.Per base sequence quality
+
+3.Per tile sequence quality
+
+4.Per sequence quality scores
+
+5.Per base sequence content
+
+6.Per sequence GC content
+
+7.Per base N content
+
+8.Sequence Length Distribution
+
+9.Sequence Duplication Levels
+
+10.Overrepresented sequences
+
+11.Adapter Content
+
+结果解读产生两个结果---文件html;网页版结果zip
+本地版结果需要重点关注的结果
+Basic Statistics: 对数据量的概览
+Per base sequence quality：reads每个位置测序质量最直接的展示
+Per sequence quality scores：总体reads测序质量趋势
+Per base sequence content： ATGC含量估计测序是否存在偏差
+Sequence Duplication Levels：影响测序的因素太多，查看是否存在污染，数据处理时是否需要去冗余；现在数据量都可以满足需求，因此前期数据处理时，尽量高标准，严格质控。
+
+
+查看网页版结果
+使用浏览器打开后缀是html的文件，就是图表化的fastqc报告。
