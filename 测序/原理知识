@@ -59,7 +59,7 @@ Quality scores, that are part of the output,reflect how cofident the machine is 
 一片cluster发出的荧光颜色一模一样，机器会不知道这到底来源于哪一个DNA簇，这种情况多见于前几个bp（引物与接头-序列相同），故需要把前几bp的接头切除
 This is called "low density", and the over abundance of a single color can make it hard to identify the individual sequence; the colors will blur together.
 Another reason you might get a low quality score is when there are lots of probes the same color in the same region
-"Low density" is espeically a
+"Low density" is espeically a problem when the first few nucleotides are sequenced, because that is when the machine determines where the DNA fragments are located on the grid.
 
 Illumina	光学原理
 激光器（两个，分别发出红【激发A与C碱基的荧光基团】绿【激发T与G碱基的荧光基团】两种颜色的激光，）
