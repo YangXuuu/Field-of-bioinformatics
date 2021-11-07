@@ -53,9 +53,31 @@ pre-phasing【有的分子跑的超前，每次反应延长多个碱基而并非
 机器无法准确判断碱基类型，导致测序质量变差
 Sometimes a probe will not shine as bright as it should and the machines isn‘t super confident that it is calling the correct color.
 Quality scores, that are part of the output,reflect how cofident the machine is that it correctly called a base.
-
+在反应过程中，有的碱基迭代基团脱落了，3‘羟基会暴露出来，就会紧接着延长下一个碱基
 
 （ii）
+一片cluster发出的荧光颜色一模一样，机器会不知道这到底来源于哪一个DNA簇，这种情况多见于前几个bp（引物与接头-序列相同），故需要把前几bp的接头切除
+
+
+Illumina	光学原理
+激光器（两个，分别发出红【激发A与C碱基的荧光基团】绿【激发T与G碱基的荧光基团】两种颜色的激光，）
+通过反射镜（flow cell放置的位置），四个CCD会记录到不同颜色的不同波长的光线，每个CCD会产生一张照片，四张照片分别记录了四种碱基的荧光强度，软件会通过对比四种光强度来判断碱基
+
+BCL文件
+扫描出的最原始文件为TIFF格式，特别大，不便于存储，所以会转换成BCL文件（对每个光点做记录，二进制）
+文件记录了【1，Lane号；2，Tile号；3，X，Y轴的坐标位置；4，每个循环的A,C,G,T对应的光强度】 光强度最强的为最终确认的碱基类型
+
+FASTQ文件
+为下游分析人员拿到的最原始的数据文件，四行一看
+第一行为@开头，reads的目录信息，read来源于哪个lane，tail的横纵坐标，测序仪信息
+第二行为测序的序列本身，150bp
+第三行以+开头，后面要么没有东西，要么与第一行后面相同
+第四行为每一种碱基的测序质量，与第二行的长度相同，字符由下面的公式得来
+Q=-10*log10P （P为测序错误率；Q为测序质量，越高质量越好）
+Phred = Q + 33/64
+加33或64由不同的测序仪来判断，15年之后加33，15年之前加64
+akama字符？？通过akama表查到？
+
 
 
 
