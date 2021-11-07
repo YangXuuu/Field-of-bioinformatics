@@ -41,7 +41,21 @@ Forward strand测序
 在激光扫描下，根据发出的荧光信号的颜色来判断是哪种碱基，由此推断出被测的是哪种碱基
 
 Index测序 （区分不同样本）
-先加入index primer，每完成一个测序便将产物洗脱，加入缓冲液pH呈中性后，
+先加入index primer，每完成一个测序便将产物洗脱，加入缓冲液pH呈中性后
+
+Reverse strand 测序
+对负链进行测序，负链的引物（read 2 primer），与正链测序完全一致
+
+影响测序质量的原因 （主要的两个）
+（i）DNA簇的荧光含量低
+（原因：phasing【少量分子未完成延长，随着反应的进行，这样的少量分子会变得越来越多，这也是测序为150bp的原因，太长了会导致测序质量变差】；
+pre-phasing【有的分子跑的超前，每次反应延长多个碱基而并非一个(因为迭代基团非常容易脱落)，随着反应的进行，这样异常的分子也会越来越多】）
+机器无法准确判断碱基类型，导致测序质量变差
+Sometimes a probe will not shine as bright as it should and the machines isn‘t super confident that it is calling the correct color.
+Quality scores, that are part of the output,reflect how cofident the machine is that it correctly called a base.
+
+
+（ii）
 
 
 
