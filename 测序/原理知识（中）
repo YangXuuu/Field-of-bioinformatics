@@ -1,5 +1,4 @@
 ###
-
 为了解析数据信息（e.g.编码什么样的基因，与哪些序列相似性较高，有什么样的功能），需要将测序得到的序列与公共数据库或已知的一些数据进行比对
 比对的两种方法（alignment - 比对；mapping - 回帖）
 Alignment - 一条reads上每一位碱基的精准匹配，如果每一个reads都匹配上了，那么这个alignment是精确的
@@ -39,6 +38,35 @@ SAM格式：header
 
 SAM格式：alignment
 主文件包含12列
+1 QNAME: query template name, aka. read ID
+2 FLAG：indicates alignment information about the read, e.g. paired,aligned,etc. 每个值代表一种比对情况
+3 RNAME: reference sequence name, e.g. chromosome/transcript id, 比对到参考基因组的id
+4 POS: 1-based position, 比对到参考基因组的位置，从参考基因组第一位开始计算
+5 MAPQ： mapping quality，比对到的质量值 (要求>30)
+6 CIGAR: summary of alignment, e.g. insertion,deletion 具体比对信息
+7 RNEXT: reference sequence name of the primary alignment of of the NEXT read. For paired-end sequencing, NEXT read is the paired read, corresponding to the RNAME column.
+8 PNEXT: Position of the paimary alignment of the NEXT read in the template. Set as 0 when the information is unavailable. It corresponds to POS column. 位置信息
+9 TLEN: the number of bases covered by the reads from the same fragment. Plus/minus means the correct read is the leftmost/rightmost read. E.g. compare first and last lines插入片段
+10 SEQ：read sequence
+11 QUAL: read quality; * means such information is not available;reads质量值
+
+SAM格式：alignment - flag
+flag: 位标识，每一个数字代表一种比对情况，这里的值是符合情况的数字相加总和
+0 单端测序序列（SE）
+
+
+
+
+SAM格式：alignment - CIGAR
+简要比对信息表达式 （Compact ldiosyncratic Gapped Alignment Report），其以参考序列为基础，使用数字加字母表示比对结果
+M - alignment match (can be a sequence match or mismatch)
+I - Insertion to the reference; 在外源序列插入一些碱基才能匹配
+D - Deletion from the reference; 参考基因组上删去一些碱基才能匹配
+N - Skipped region from the reference；在参考基因组上过滤掉一些碱基才能匹配
+S
+
+
+
 
 
 
