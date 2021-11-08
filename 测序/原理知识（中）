@@ -1,0 +1,46 @@
+###
+
+为了解析数据信息（e.g.编码什么样的基因，与哪些序列相似性较高，有什么样的功能），需要将测序得到的序列与公共数据库或已知的一些数据进行比对
+比对的两种方法（alignment - 比对；mapping - 回帖）
+Alignment - 一条reads上每一位碱基的精准匹配，如果每一个reads都匹配上了，那么这个alignment是精确的
+Mapping允许一条reads上一个区间的匹配
+Mapping is part of alignment
+
+local blast
+本地的集群比对
+
+query id - 待测序列id
+subject id - 比对的库文件
+Identity - 序列比对一致性的百分比
+len - 比对长度
+mis - 比对区域错配数
+q.s - 在query id的起始位置
+q.e - 在query id的终止位置
+e - value - 可靠性评估，值越小相似度越高 （1e -5 / 1e -10）
+score - 相似度打分，分数越高，相似度越高
+
+当处理上百万条数据时，blast变得很低效
+bowtie2可以讲reads切割成不同的区段，在mapping回基因组
+Minimap2，nucmer：将长DNA序列（一般通过三代测度BAM格式转换成fasta）回帖到基因组上
+
+这三种比对后都是以SAM格式存储，可以用IGV进行可视化
+
+SAM格式 （用来存储测序reads与参考序列比对结果信息的一种文件格式）
+Coor - 位置信息
+ref - 碱基信息
+
+SAM格式：header
+@HD VN:1.6 SO:coordinate
+@SQ SN:ref LN:45
+
+@HD, 格式的版本，比对序列的排列顺序
+@SQ, 参考序列说明 （SN: ref name，LN是参考序列的长度）
+@PG, 使用的比对程序说明
+
+SAM格式：alignment
+主文件包含12列
+
+
+
+
+
