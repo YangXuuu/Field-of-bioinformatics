@@ -53,9 +53,18 @@ SAM格式：alignment
 SAM格式：alignment - flag
 flag: 位标识，每一个数字代表一种比对情况，这里的值是符合情况的数字相加总和
 0 单端测序序列（SE）
-
-
-
+1（0*1）read paired read是pair中的一条 （read表示本条read，mate表示pair中的另一条read）
+2（0*2）read mapped in proper pair  pair一正一负完美的比对上
+4（0*4）read unmapped 这条read没有比对上
+8（0*8）mate unmapped mate也没有比对上
+16（0*10）read reverse strand 这条read反向比对
+32（0*20）mate reverse strand mate 反向比对
+64（0*40）first in pair 这条read是read1
+128（0*80）second in pair 这条read是read2
+256（0*100）not primary alignment 第二次比对
+512（0*200）read fails platfom/vendor quality checks 比对质量不合格
+1024(0*400) read is PCR or optical duplicate read read是PCR或光学副本产生
+2048（0*800）supplementray alignment 辅助比对结果
 
 SAM格式：alignment - CIGAR
 简要比对信息表达式 （Compact ldiosyncratic Gapped Alignment Report），其以参考序列为基础，使用数字加字母表示比对结果
@@ -63,7 +72,26 @@ M - alignment match (can be a sequence match or mismatch)
 I - Insertion to the reference; 在外源序列插入一些碱基才能匹配
 D - Deletion from the reference; 参考基因组上删去一些碱基才能匹配
 N - Skipped region from the reference；在参考基因组上过滤掉一些碱基才能匹配
-S
+S - Soft clip on the read (clipped sequence present in <seq>) 没有比对上参考基因组，但保留在序列里
+H - Hard clip on the read (clipped sequence NOT present in <seq>) 没有比对上参考基因组，不保留在序列里
+P - Padding (silent deletion from the padded reference sequence) 添补的比对
+
+SAM格式：alignment - 第12列
+SAM格式的第12列是一些可选字段，如下：
+AS:i 匹配的得分
+XS:i 第二好的匹配的得分
+YS:i mate 序列匹配的得分
+XN:i 在参考序列上模糊碱基的个数
+XM:i 错配的个数
+XO:i gap open的个数
+XG:i gap延伸的个数
+NM:i 经过编辑的序列
+YF:i 说明为什么这个序列被过滤的字符串
+YT:Z
+MD:Z 代表序列和参考序列错配的字符串
+
+
+
 
 
 
