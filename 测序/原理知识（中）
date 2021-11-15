@@ -90,13 +90,38 @@ YF:i 说明为什么这个序列被过滤的字符串
 YT:Z
 MD:Z 代表序列和参考序列错配的字符串
 
+SAM是一种特殊的存储格式，是一种可读的文本形式，通常数据量会比较大，占集群存储空间较多，为了节省磁盘的存储空间，需要用一些软件对他进行压缩。
+SAM文件（6.7G） 通过SAM tools转换成BAM文件（1.1G） CRAM（0.5G）;前两者常用
 
+Samtools - view (-b -h -H -S )
+例子：
+1）将sam文件转换成bam文件
+$ samtools view -bS abc.sam > abc.bam
+$ samtools view -b -S abc.sam -o abc.bam
+2) 提取比对到参考序列上的比对结果
+$ samtools view -bF 4 abc.bam > abc.F.bam
+3) 提取paired reads中两条reads都比对到参考序列上的比对结果，只需要把两个4+8的值12作为过滤参数即可
+$ samtools view -bF 12 abc.bam > abc.F12.bam
+4) 提取没有比对到参考序列上的比对结果
+$ samtools view -bf 4 abc.bam > abc.f.bam
+5) 提取bam文件中比对到caffold1上的比对结果，并保存到sam文件格式
+$ samtools view abc.bam scaffold1 > scaffold1.sam
+6) 提取scaffold1上能比对到30k到100k区域的比对结果
+$ samtools view abc.bam scaffold1:30000-100000 > scaffold1_30k-100k.sam
+7) 根据fasta文件，将header加入到sam或bam文件中
+$ samtools view -T genome.fasta -h scaffold1.sam > scaffold1.h.sam
 
+Samtools
+Sort: 对bam文件进行排序
+merge: 合并多个bam文件
+index: 对bam产生.bai的索引文件
+faidx：对fasta产生.fai的文件
+tview：直观显示比对情况
+flagstat：给出bam文件比对结果
+depth：每个碱基测序深度
 
-
-
-
-
-
-
-
+总结
+测序技术; 序列存储格式； 比对软件； 输出格式
+第一代测序技术; FASTA; blast; /
+第二代测序技术; FASTQ; Bwa, bowtie, hisat2; SAM
+第三代测序技术; Bam->fasta; minimap2, nucmer; SAM
