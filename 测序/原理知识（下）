@@ -1,1 +1,47 @@
 ###
+基因结构&注释
+
+人类23对染色体，每条染色体DNA双链，位点相同-纯合，位点不同-杂合
+
+对生物学信息进行记录：Bed格式，一种灵活表示位置，坐标，注释信息的数据格式
+必要列：
+
+
+严格的要求：整个文件中列数必须是相等的
+常用工具：Bedtools （对bed做处理，位置之间的比较，取交集并集，看临近区域）
+
+更复杂的基因结构如何展示？
+外显子，内含子，cds编码区域，通过外显子拼接去知道转录本，通过转录本的start codon到stop codon知道转录的蛋白质
+
+基因元件 - 剪切位点
+内含子和外含子会一起转录，但在后面修饰和加工的过程中它需要把其中的内含子切掉，然后把外含子拼起来，这些位置位点如何识别？
+这两者之间的边界被称为slice region - 剪切区域 （内含子边界上一般以AG碱基为主），位点能被酶识别（突变位点可干扰此步骤），将内含子切出来，
+
+基因元件 - 增强子
+通过DNA三维结构的结合，与启动子区整合，从而促进整个基因的转录
+
+GFF3格式
+attributes：parent - 来源，ID - 自身
+
+DNA - Population （个体层面的研究）
+突变 - SNP（单点突变）,InDel（短的插入和缺失）
+
+
+Structure variation （SV）基因组/染色体结构变异
+缺失（deletion），重复（duplication）；copy number variant（CNV）拷贝数变异，易位（translocation），倒位（inversion）
+
+1000 Genomes Project
+检测到的突变信息如何保存？
+VCF（variant call format）
+Header - 表头，注释信息
+#CHROM - 染色体；POS - 位点；REF - reference上碱基情况，ALT - 实际样本中的测到的碱基情况；QUAL - 质量值；FILTER - 是否经过过滤
+INFO， DP - depth，位点覆盖率有多高，是一个总体的数值 （100个样本的话会算depth综合）
+GT - genotype，两条同源染色体与参考基因组碱基情况相同 - 0/0， 一个不一样 - 0/1， 两个都不一样 1/1
+0是reference，1和2是alter碱基，alter只有一个 - 1
+AD - allele depth， AC - allele count, AF - allele frequency, AN - allele total number
+
+IGV - 可视化工具
+java
+
+
+
